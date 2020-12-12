@@ -1,0 +1,109 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+  padding: 0px;
+  margin: 0px;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: $base-font;
+  color: $first-font-color;
+  background-color: $body-color;
+
+  // background: url('../images/big_logo.png') no-repeat top right 50%/40%,
+  //   url('../images/bg-image/Ellipse_big_red.png') no-repeat top left/60%,
+  //   url('../images/bg-image/Ellipse_little-red.png') no-repeat top 8% right 9%/2%,
+  //   url('../images/bg-image/Ellipse_fff_right.png') no-repeat top 15% right 3%/12%,
+  //   url('../images/bg-image/Ellipse_grey_right.png') no-repeat top 27% right 2%/5%,
+  //   url('../images/bg-image/Ellipse_bottom_right_big.png') no-repeat bottom
+  //     right / 50%,
+  //   url('../images/bg-image/Ellipse_bottom_left_fff.png') no-repeat bottom left
+  //     5%/15%,
+  //   url('../images/bg-image/Ellipse_bottom_left_grey.png') no-repeat bottom 10%
+  //     left 3%/5% $body-color;
+}
+
+.section-flex-wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+.section-image-decor {
+  width: 250px;
+  height: 250px;
+  border: 20px solid #e8c300;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  position: absolute;
+}
+
+.decor-section-line {
+  height: 100%;
+  width: 1px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+
+  &--left {
+    left: 294px;
+    bottom: 0;
+  }
+  &--right {
+    right: 294px;
+    bottom: 0;
+  }
+  &--center {
+    right: 50%;
+    left: 50%;
+    bottom: 0;
+  }
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type='checkbox'].visually-hidden,
+input[type='radio'].visually-hiden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  bottom: 0px;
+  padding: 0px;
+  word-spacing: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  opacity: 0;
+}
+
+.container {
+  margin: 0 auto;
+  @media screen and (max-width: $mobile-bp-max) {
+    // width: 100%;
+    width: $mobile-w-min;
+  }
+  @media screen and (min-width: $tablet-bp-min) {
+    width: $tablet-w;
+  }
+  @media screen and (min-width: $desktop-bp-min) {
+    width: $desktop-w;
+  }
+}

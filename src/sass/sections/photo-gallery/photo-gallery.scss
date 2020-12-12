@@ -1,0 +1,8 @@
+.photo-gallery {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &__item {
+    width: 100%;
+  }
+}

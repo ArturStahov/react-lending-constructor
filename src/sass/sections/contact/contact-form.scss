@@ -1,0 +1,103 @@
+.contact-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  &__input-block {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  &__input {
+    width: 420px;
+    height: 60px;
+    background-color: #e5e5e5;
+    border: none;
+    border-radius: 0.5rem;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+    &::placeholder {
+      @include font-settings(1.4rem, 1.2, 400, rgba(51, 51, 51, 0.5));
+    }
+  }
+  &__textarea {
+    width: 100%;
+    height: 120px;
+    background-color: #e5e5e5;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 20px;
+    resize: none;
+    margin-bottom: 10px;
+  }
+
+  &__button {
+    width: 640px;
+    @include font-settings(1.2rem, 1.2, 700, $button-text-color);
+    text-transform: uppercase;
+    height: 60px;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #e8c300;
+    transition-property: background-color, border, color;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background-color: transparent;
+      border: 1px solid rgba(51, 51, 51, 0.5);
+      color: rgba(51, 51, 51, 0.5);
+    }
+  }
+}
+
+.contact-info-list {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 10px;
+  align-items: center;
+  &__item {
+    padding-left: 18px;
+    position: relative;
+    @include font-settings(1.3rem, 1.2, 600, rgba(0, 0, 0, 0.5));
+    &::before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      position: absolute;
+      left: -8px;
+      bottom: 3px;
+    }
+    &--ico-map {
+      &::before {
+        background-image: url(../../../images/ico/location.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    &--ico-phone {
+      &::before {
+        background-image: url(../../../images/ico/phone.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    &--ico-mail {
+      &::before {
+        background-image: url(../../../images/ico/envelop.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

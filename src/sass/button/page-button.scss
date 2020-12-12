@@ -1,0 +1,60 @@
+$hover-color: #e8c300;
+$border-color: #ffffff;
+$button-text-color: #ffffff;
+
+.page-button {
+  @include font-settings(1.2rem, 1.2, 700, $button-text-color);
+  text-transform: uppercase;
+  width: 200px;
+  height: 60px;
+  border: 1px solid $border-color;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  &:hover,
+  :focus {
+    background-color: $hover-color;
+    border: none;
+  }
+}
+
+.button-next {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  margin: 0 auto;
+  transition-timing-function: ease-in-out;
+  transition-property: background-color, transform;
+  transition-duration: 0.3s;
+  &:hover,
+  :focus {
+    background-color: $hover-color;
+    transform: translateY(10px);
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    width: 61px;
+    height: 61px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  cursor: pointer;
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
+}

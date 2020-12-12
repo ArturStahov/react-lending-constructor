@@ -1,0 +1,87 @@
+.header {
+  position: relative;
+  width: 100%;
+  padding: 50px 0px 50px 0px;
+  background: url("../../images/header-bg.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.header-sub-title {
+  @include font-settings(1.2rem, 1.2, 700, $first-font-color);
+  text-align: center;
+  letter-spacing: 12px;
+  transform: translate(8px, 65px);
+}
+
+.header-title {
+  @include font-settings(12.6rem, 1.2, 400, $first-font-color);
+  text-align: center;
+  font-family: $second-font;
+  &:after {
+    content: "";
+    display: block;
+    width: 60px;
+    border-bottom: 5px solid #e8c300;
+    border-radius: 1rem;
+    margin: 50px auto 0px;
+  }
+}
+
+.header-button-block {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 90px;
+}
+
+.page-button--button-header {
+  &:not(:last-child) {
+    margin-right: 40px;
+  }
+}
+
+.work-time-info {
+  @include font-settings(1.2rem, 1.2, 400, #ffffff);
+  position: absolute;
+  transform: rotate(270deg);
+  top: 70%;
+  left: 81px;
+}
+
+.decor-header-line {
+  height: 874px;
+  width: 1px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+
+  &--left {
+    left: 294px;
+    bottom: 0;
+  }
+  &--right {
+    right: 294px;
+    bottom: 0;
+  }
+  &--center {
+    height: 767px;
+    right: 50%;
+    left: 50%;
+    bottom: 0;
+  }
+}
+
+.decor-header-line-top {
+  height: 1px;
+  width: 530px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  &--left {
+    left: 55px;
+    top: 104px;
+  }
+  &--right {
+    right: 55px;
+    top: 104px;
+  }
+}

@@ -1,0 +1,34 @@
+@import "./helpers/variables";
+@import "./helpers/mixins";
+@import "./fonts";
+@import "./base";
+
+// ====header====
+@import "./header/header";
+@import "./header/page-nav";
+
+@import "./button/page-button";
+@import "./header/social-nav";
+
+//==****SECTION****
+//====About us====
+@import "./sections/about/about";
+//===Team====
+@import "./sections/team/team";
+//====book====
+@import "./sections/book/book";
+@import "./sections/book/book-form";
+//====slider-dishes ====
+@import "./sections/slider-dishes/slider-dishes";
+//====private-events====
+@import "./sections/private-events/events";
+//====photo-gallery====
+@import "./sections/photo-gallery/photo-gallery";
+//====contact====
+@import "./sections/contact/contact";
+@import "./sections/contact/contact-form";
+//====google-maps====
+@import "./sections/google-map/google-map.scss";
+//====END Sections=====
+//====footer====
+@import "./footer/footer";

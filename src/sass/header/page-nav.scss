@@ -1,0 +1,36 @@
+.page-nav {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 150px;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: flex-start;
+
+  &:not(:last-child) {
+    margin-right: 80px;
+  }
+}
+
+.nav-item {
+  &:not(:last-child) {
+    margin-right: 80px;
+  }
+  &__link {
+    @include font-settings(1.2rem, 1.2, 600, $first-font-color);
+    text-transform: uppercase;
+    transition-property: color;
+    transition-duration: 0.3s;
+    &:hover,
+    :focus {
+      color: $nav-link-hover;
+    }
+  }
+}
+
+.logo-link {
+  transform: translate(12px, -20px);
+
+  margin-right: 80px;
+}
