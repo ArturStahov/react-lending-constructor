@@ -1,77 +1,134 @@
 import React, { Component } from 'react'
-import ContainerWrapper from './components/Container/Container'
-import TabControl from './components/TabControls/TabControls'
-import PaneList from './components/PaneList/PaneList'
+
+import Container from './components/Container/Container'
+import TabControl from './components/Menu/TabControls/TabControls'
+import PaneList from './components/Menu/PaneList/PaneList'
 import FormAddItems from './components/FormAddItem/FormAddItem'
 import ButtonEditsMenu from './components/ButtonEditMenu/ButtonEditMenu'
 import Header from './components/Header/Header'
+import Modal from './components/Modal/Modal'
+import RenderPortal from './components/RenderPortal'
+import Slider from './components/Slider/Slider'
+import FormSliderOptions from './components/FormSliderOptions/FormSliderOptions'
+import ButtonEditSlider from './components/buttonEditSlider/ButtonEditSlider'
+
 
 export default class App extends Component {
 
+  //  objectMenu = {    выд обекта в dataMenu там всегда 1 обект эго можна дополнить и отправить на сервер
+  //   options: {
+  //     menuName,
+  //     firstActiveTab
+  //   },
+  //   itemArr,
+  // }
+
   state = {
-    data: [],
-    filter: "",
-    toggle: false
-
+    dataMenu: [],
+    dataSlider: [],
+    filterMenuTab: "",
+    toggleTabEditor: false,
+    toggleSliderEditor: false,
+    menuName: ''
   }
 
-  componentDidMount() {
-    if (localStorage.getItem('save_data')) {
-      this.setState({
-        data: JSON.parse(localStorage.getItem('save_data'))
-      })
-    }
+  // //забырать с бекенда тут
+  // componentDidMount() {
+  //   // if (localStorage.getItem('save_data')) {
+  //   //   this.setState({
+  //   //     data: JSON.parse(localStorage.getItem('save_data'))
+  //   //   })
+  //   // }
+  // }
+
+
+
+  toggleTabMenu = () => this.setState(prevState => ({ toggleTabEditor: !prevState.toggleTabEditor }));
+  toggleSliderMenu = () => this.setState(prevState => ({ toggleSliderEditor: !prevState.toggleSliderEditor }));
+
+  // componentDidUpdate(prevState, prevProps) {
+  //   // сдесь отправить данные на сервер
+  //   //по проверке если обновили масив dataMenu
+  //   // обеденить в этом методе все обекты от плагинов
+  //   //в один обект для отправки на бек
+  //   // 
+  // }
+
+
+  handlerDishSlider = (objectSlider) => {
+    console.log(objectSlider)
+    this.toggleSliderMenu()
   }
 
-
-  toggle = () => this.setState(prevState => ({ toggle: !prevState.toggle }));
-
-  handlerCreateTable = (arr) => {
+  handlerCreateTable = (objectMenu) => {
     this.setState({
-      data: [...arr],
+      dataMenu: [...objectMenu.itemArr],
+      menuName: objectMenu.options.menuName,
+      filterMenuTab: objectMenu.options.firstActiveTab
     })
-    this.toggle()
-    localStorage.setItem('save_data', JSON.stringify(arr))
+    this.toggleTabMenu()
   }
 
-  handlerTabButton = (filter) => {
-    console.log(filter)
+  handlerTabButton = (filterMenuTab) => {
     this.setState({
-      filter
+      filterMenuTab
     })
   }
 
   filterTabItem = () => {
-    return this.state.data.filter(item =>
-      item.tabName.toLowerCase().includes(this.state.filter.toLowerCase()),
+    return this.state.dataMenu.filter(item =>
+      item.tabName.toLowerCase().includes(this.state.filterMenuTab.toLowerCase()),
     );
   };
 
   render() {
-    const { data, toggle } = this.state
+    const { dataMenu, toggleTabEditor, toggleSliderEditor, menuName, dataSlider } = this.state
     const visibleTabList = this.filterTabItem()
     return (
       <>
-        {!toggle && <>
-          <Header title='Dish Menu' />
-          <ContainerWrapper>
-            {data.length > 0 && <TabControl data={data} onHandlerButton={this.handlerTabButton} />}
-          </ContainerWrapper>
-          <ContainerWrapper>
-            <PaneList data={visibleTabList} />
-          </ContainerWrapper>
-          <ContainerWrapper>
-            <ButtonEditsMenu title={data.length > 0 ? 'Edit menu' : 'Create Menu'} toggle={this.toggle} />
+        <RenderPortal domID='#slider-root'>
+          <>
+            <ButtonEditSlider title='Edit Slider' toggle={this.toggleSliderMenu} />
+            <Slider />
+          </>
 
-          </ContainerWrapper>
-        </>}
+        </RenderPortal>
+        {/* ======dish Menu================= */}
+        {
+          !toggleTabEditor && <>
+            <Header title={menuName} />
+            <Container>
+              {dataMenu.length > 0 && <TabControl data={dataMenu} onHandlerButton={this.handlerTabButton} />}
+            </Container>
+            <Container>
+              <PaneList data={visibleTabList} />
+            </Container>
+            <Container>
+              <ButtonEditsMenu title={dataMenu.length > 0 ? 'Edit menu' : 'Create Menu'} toggle={this.toggleTabMenu} />
+            </Container>
+          </>
+        }
+        {/* ======dish Menu End================= */}
 
-        {toggle && <>
-          <ContainerWrapper>
-            <FormAddItems onCreateTable={this.handlerCreateTable} data={data} />
-          </ContainerWrapper>
-        </>}
 
+        {
+          toggleTabEditor && (
+            <Modal onCloseModal={this.toggleTabMenu}>
+              <Container>
+                <FormAddItems onCreateTable={this.handlerCreateTable} data={dataMenu} />
+              </Container>
+            </Modal>
+          )
+        }
+        {
+          toggleSliderEditor && (
+            <Modal onCloseModal={this.toggleSliderMenu}>
+              <Container>
+                <FormSliderOptions onCreateSlider={this.handlerDishSlider} data={dataSlider} />
+              </Container>
+            </Modal>
+          )
+        }
       </>
     )
   }
