@@ -1,58 +1,19 @@
 
 import { Component } from 'react'
-import styled from 'styled-components'
 import { Input } from 'antd';
 import uniqid from 'uniqid'
 
+import { LabelText, Button, Label, Form, Wrapper, ContentBox } from './StyledComponent'
+import ItemSlideEditor from './ItemSliderEditor/ItemSliderEditor'
+import Notifications from '../Notification/Notification'
 const { TextArea } = Input;
 
 
 
-const Wrapper = styled.div`
-position:relative;
-padding-top: 50px;
-padding-bottom:50px;
-width:100%;
-display:flex;
-flex-wrap:wrap;
-justify-content:flex-start;
-`
-const Form = styled.form`
-width:400px;
-margin-bottom:50px;
-`
-const Label = styled.div`
-margin-bottom: 10px;
-`
-
-const Button = styled.button`
-width:150px;
-height: 40px;
-background-color:green;
-border-radius:1rem;
-border:2px solid #000000;
-color:#fff;
-font-size:1.4rem;
-text-transform:uppercase;
-font-weight:600;
-cursor:pointer;
-&.buttonCreate{
-    background-color:red;
-}
-&.buttonCreateItem{
-    margin-right:10px;
-}
-`
-const LabelText = styled.p`
-margin-bottom: 4px;
-font-size:1.4rem;
-font-weight:800;
-color :#8BB92E;
-`
-
 export default class FormSliderOption extends Component {
 
     state = {
+        imageHref: '',
         title: '',
         subTitle: '',
         description: '',
@@ -66,7 +27,6 @@ export default class FormSliderOption extends Component {
             itemArr: [...this.props.data]
         })
     }
-
 
     handlerSlideCreate = () => {
         const { itemArr } = this.state
@@ -85,12 +45,13 @@ export default class FormSliderOption extends Component {
 
     handlerCreateItem = (e) => {
         e.preventDefault()
-        const { subTitle, title, description, isEdit, id } = this.state
+        const { subTitle, title, description, isEdit, id, imageHref } = this.state
 
         const create = () => {
             this.setState((prevState) => {
                 return {
                     itemArr: [...prevState.itemArr, {
+                        imageHref,
                         title,
                         subTitle,
                         description,
@@ -108,7 +69,7 @@ export default class FormSliderOption extends Component {
         }
         const clearState = () => {
             this.setState({
-
+                imageHref: '',
                 title: '',
                 subTitle: '',
                 description: '',
@@ -122,14 +83,31 @@ export default class FormSliderOption extends Component {
         clearState();
     }
 
+    deleteItem = (id) => {
+        this.setState({
+            itemArr: this.state.itemArr.filter(e => e.id !== id)
+        })
+    }
+
+    // метод обрабатует нажатие на кнопку редактировать итем в листе и выводит в форму значение для редактирования
+    editItem = (id) => {
+        let itemEdit = this.state.itemArr.find(e => e.id === id)
+        this.setState({
+            ...itemEdit,
+            isEdit: true
+        })
+    }
+
     render() {
-        const { title, subTitle, description, isEdit, itemArr } = this.state
+        const { title, subTitle, description, isEdit, itemArr, imageHref } = this.state
         const firstStep = this.props.data.length // проверяем на первый визиn
         return (
-
             <Wrapper>
-
                 <Form onSubmit={this.handlerCreateItem}>
+                    <Label >
+                        <LabelText>Slide Image href</LabelText>
+                        <Input name="imageHref" value={imageHref} onChange={this.handlerInput} required autoComplete="off" />
+                    </Label>
                     <Label >
                         <LabelText>Slide Title (max length 25 symbols)</LabelText>
                         <Input name="title" maxLength={25} value={title} onChange={this.handlerInput} />
@@ -137,13 +115,13 @@ export default class FormSliderOption extends Component {
 
                     <Label >
                         <LabelText>input sub Title</LabelText>
-                        <Input name="subTitle" type="text" value={subTitle} onChange={this.handlerInput} required />
+                        <Input name="subTitle" type="text" value={subTitle} onChange={this.handlerInput} />
                     </Label>
 
 
                     <Label>
                         <LabelText>Input slide description</LabelText>
-                        <TextArea name="description" value={description} onChange={this.handlerInput} required />
+                        <TextArea name="description" value={description} onChange={this.handlerInput} />
                     </Label>
 
                     <Button className='buttonCreateItem' type="submit">{isEdit ? "Save Change" : "Create Item"}</Button>
@@ -151,7 +129,10 @@ export default class FormSliderOption extends Component {
                 </Form>
 
 
-
+                {itemArr.length > 0
+                    ? <ContentBox> <ItemSlideEditor arrItems={itemArr} onDeleteItem={this.deleteItem} onEditItem={this.editItem} /> </ContentBox>
+                    : <Notifications message="Create Item for next step!" />
+                }
 
             </Wrapper>
 

@@ -8,7 +8,7 @@ import { Description, SubTitle, Title, ContentBox, Image, ImageDecor, ImageBox, 
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
-export default function Sliders() {
+export default function Sliders({ itemArr }) {
     return (
         <SliderWrapper>
             <AutoplaySlider
@@ -16,35 +16,25 @@ export default function Sliders() {
                 cssModule={[AnimationStyles]}
                 play={true}
                 cancelOnInteraction={false} // should stop playing on user interaction
-                interval={2000}
+                interval={3000}
             >
-                <div>
-                    <SlideItem >
-                        <ImageBox>
-                            <Image src="./images/slider/slide1.jpg" alt="team images" />
-                            <ImageDecor />
-                        </ImageBox>
 
-                        <ContentBox>
-                            <Title>Chocolate pancakes</Title>
-                            <SubTitle>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at velit
-                                maximus,
-                              molestie est a, tempor magna.</SubTitle>
-                            <Description>nteger ullamcorper neque eu purus euismod, ac faucibus mauris posuere. Morbi
-                              non
-                              ultrices ligula. Sed dictum, enim sed
-                              ullamcorper feugiat, dui odio vehicula eros, a sollicitudin lorem quam nec sem. Mauris tincidunt feugiat
-                              diam convallis
-                          pharetra. Nulla facilisis semper laoreet.</Description>
-                        </ContentBox>
-                    </SlideItem>
-                </div>
+                {itemArr.map(({ imageHref, title, subTitle, description, id }) => (
+                    <div key={id}>
+                        <SlideItem key={id}>
+                            <ImageBox>
+                                <Image src={imageHref} alt={title} />
+                                <ImageDecor />
+                            </ImageBox>
 
-
-
-
-
-
+                            <ContentBox>
+                                <Title>{title}</Title>
+                                <SubTitle>{subTitle}</SubTitle>
+                                <Description>{description}</Description>
+                            </ContentBox>
+                        </SlideItem>
+                    </div>
+                ))}
 
 
             </AutoplaySlider>

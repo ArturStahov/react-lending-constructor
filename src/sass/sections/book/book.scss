@@ -12,7 +12,7 @@
     text-align: center;
     margin-bottom: 5px;
     &:after {
-      content: '';
+      content: "";
       display: block;
       width: 60px;
       border-bottom: 5px solid #e8c300;
@@ -46,4 +46,10 @@
       font-weight: 600;
     }
   }
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 15px;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  font-size: 15px;
 }

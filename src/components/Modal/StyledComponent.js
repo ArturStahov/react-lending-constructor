@@ -16,10 +16,12 @@ const Modal = styled.div`
   z-index:99;
 `;
 const ContentBlock = styled.div`
+padding:20px;
   position: relative;
-  background-color:#fff;
+  background-color:#1D7373;
   height: 90%;
   width: 90%;
+  border-radius:1rem;
 `;
 const ButtonClose = styled.button`
 display:flex;
@@ -30,11 +32,12 @@ align-items:center;
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: red;
+  background-color: #FFA100;
   border: 2px solid grey;
   border-radius: 50%;
   transition:transform 0.4s ease-in-out;
   z-index:99;
+  outline:none;
   cursor: pointer;
   
       &:hover{

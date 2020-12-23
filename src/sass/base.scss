@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
+  scroll-behavior: smooth;
 }
 
 *,
@@ -30,18 +31,6 @@ body {
   font-family: $base-font;
   color: $first-font-color;
   background-color: $body-color;
-
-  // background: url('../images/big_logo.png') no-repeat top right 50%/40%,
-  //   url('../images/bg-image/Ellipse_big_red.png') no-repeat top left/60%,
-  //   url('../images/bg-image/Ellipse_little-red.png') no-repeat top 8% right 9%/2%,
-  //   url('../images/bg-image/Ellipse_fff_right.png') no-repeat top 15% right 3%/12%,
-  //   url('../images/bg-image/Ellipse_grey_right.png') no-repeat top 27% right 2%/5%,
-  //   url('../images/bg-image/Ellipse_bottom_right_big.png') no-repeat bottom
-  //     right / 50%,
-  //   url('../images/bg-image/Ellipse_bottom_left_fff.png') no-repeat bottom left
-  //     5%/15%,
-  //   url('../images/bg-image/Ellipse_bottom_left_grey.png') no-repeat bottom 10%
-  //     left 3%/5% $body-color;
 }
 
 .section-flex-wrapper {
@@ -80,8 +69,8 @@ body {
 }
 
 .visually-hidden:not(:focus):not(:active),
-input[type='checkbox'].visually-hidden,
-input[type='radio'].visually-hiden {
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hiden {
   position: absolute;
   width: 1px;
   height: 1px;

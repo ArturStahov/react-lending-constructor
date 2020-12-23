@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Modal, ContentBlock, ButtonClose } from './StyledComponent';
 
-import { MdClear } from "react-icons/md";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
+
+
 export default class ModalWindows extends Component {
-
-
-
     componentDidMount() {
         document.body.style.overflow = 'hidden';
         window.addEventListener('keydown', this.handlerEscape);
@@ -31,7 +32,7 @@ export default class ModalWindows extends Component {
                     <ButtonClose
                         type="button"
                         onClick={() => { this.props.onCloseModal() }}>
-                        <MdClear />
+                        <FontAwesomeIcon icon={faTimes} />
                     </ButtonClose>
 
                     {this.props.children}

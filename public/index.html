@@ -21,18 +21,18 @@
 
         <ul class="nav-list">
           <li class="nav-item"><a href="#" class="nav-item__link">HOME</a></li>
-          <li class="nav-item"><a href="#" class="nav-item__link">ABOUT</a></li>
-          <li class="nav-item"><a href="#" class="nav-item__link">TEAM</a></li>
-          <li class="nav-item"><a href="#" class="nav-item__link">BOOKING</a></li>
+          <li class="nav-item"><a href="#about" class="nav-item__link">ABOUT</a></li>
+          <li class="nav-item"><a href="#team" class="nav-item__link">TEAM</a></li>
+          <li class="nav-item"><a href="#booking" class="nav-item__link">BOOKING</a></li>
         </ul>
         <a href="#" class="logo-link"><img src="./images/logo.png" alt="logo" class="logo"></a>
         <ul class="nav-list">
-          <li class="nav-item"><a href="#" class="nav-item__link">MENU</a></li>
-          <li class="nav-item"><a href="#" class="nav-item__link">GALERIE</a></li>
-          <li class="nav-item"><a href="#" class="nav-item__link">EVENTS</a></li>
-          <li class="nav-item"><a href="#" class="nav-item__link">CONTACT</a></li>
+          <li class="nav-item"><a href="#gallerie" class="nav-item__link">GALlERIE</a></li>
+          <li class="nav-item"><a href="#menu" class="nav-item__link">MENU</a></li>
+          <li class="nav-item"><a href="#events" class="nav-item__link">EVENTS</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-item__link">CONTACT</a></li>
         </ul>
-
+        <div id="root-admin"></div>
       </nav>
       <p class="header-sub-title">RESTAURANT</p>
       <h1 class="header-title">Hungry People</h1>
@@ -80,7 +80,7 @@
 
   <main class="main">
     <!-- ===============ABOUT==================== -->
-    <section class="about">
+    <section class="about" id="#about">
       <div class="container section-flex-wrapper">
         <div class="about__content-box">
           <h2 class="about__title">About us</h2>
@@ -99,7 +99,7 @@
       </div>
     </section>
     <!-- ===============TEAM==================== -->
-    <section class="team">
+    <section class="team" id="team">
       <h2 class="team__title">OUR TEAM</h2>
       <div class="container team__wrapper">
         <div class="team__image-box">
@@ -123,28 +123,12 @@
       <hr class="decor-section-line decor-section-line--center">
     </section>
     <!-- ===============BOOK==================== -->
-    <section class="book">
+    <section class="book" id="booking">
 
       <div class="container section-flex-wrapper">
         <div class="book__content-box">
-          <h2 class="book__title">Book a table</h2>
-          <!-- ===================book-form============= -->
-          <form class="book-form" data-type="book-form">
-            <div class="book-form__col book-form__col--left">
-              <input type="text" name="name" placeholder="Name" class="book-form__input" min="2" max="50" required>
-              <input type="text" name="phone" placeholder="Phone" class="book-form__input" min="2" max="50" required>
-              <input type="date" name="date" class="book-form__input" min="2" max="50" required>
-            </div>
-            <div class="book-form__col">
-              <input type="email" name="email" placeholder="Email" class="book-form__input" min="2" max="50" required>
-              <input type="number" name="number" placeholder="People" class="book-form__input" min="2" max="50"
-                required>
-              <input type="time" name="time" class="book-form__input" required>
-            </div>
-            <button class="page-button book-form__button" type="submit">BOOK NOW</button>
-          </form>
-
-
+          <!-- ===============BOOK order portal root==================== -->
+          <div id="order-book-root"></div>
         </div>
         <div class="book__image-box">
           <img class="book__image" src="./images/book/book.jpg" alt="about us images">
@@ -156,7 +140,7 @@
           131 637/+40 726 458 782</span></p>
     </section>
     <!-- ===============SLIDER==================== -->
-    <section class="slider-dishes">
+    <section class="slider-dishes" id="gallerie">
       <h2 class="slider-dishes__title">specialties</h2>
       <!-- ==================SLIDER_REACT_ROOT=================== -->
       <div id="slider-root"></div>
@@ -167,7 +151,7 @@
 
     </section>
     <!-- ===============MENU==================== -->
-    <section class="menu">
+    <section class="menu" id="menu">
 
       <div class="container">
         <!-- ==============================MENU_REACT_ROOT base root =========== -->
@@ -177,7 +161,7 @@
 
     </section>
     <!-- ===============EVENTS==================== -->
-    <section class="events">
+    <section class="events" id="events">
 
       <h2 class="events__title">PRIVATE EVENTS</h2>
       <div class="container events__wrapper">
@@ -212,7 +196,7 @@
       <img class="photo-gallery__item" src="./images/events/slide4.jpg" alt="slide-1">
     </section>
     <!-- ===============CONTACT==================== -->
-    <section class="contact">
+    <section class="contact" id="contact">
       <div class="container">
         <h2 class="contact__title">Contact</h2>
         <p class="contact__sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at velit maximus,

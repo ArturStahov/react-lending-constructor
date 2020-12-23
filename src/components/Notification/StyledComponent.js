@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Title = styled.p`
 font-size:1.4rem;
-color:red;
+color:#FFA100;
 font-weight:600;
 text-align:center;
 `
