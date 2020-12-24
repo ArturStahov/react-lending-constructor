@@ -5,7 +5,7 @@ import { ButtonClose, Modal, ButtonLogOut, Button } from './StyledComponent'
 
 
 
-export default function AuthModal({ children, close, onLogOut, isLogIn, onEditSlider, onEditMenu, onViewOrders }) {
+export default function AuthModal({ children, close, onLogOut, isLogIn, onEditSlider, onEditMenu, onViewOrders, onViewMessage }) {
 
 
     return (
@@ -17,6 +17,7 @@ export default function AuthModal({ children, close, onLogOut, isLogIn, onEditSl
                     <Button onClick={() => onEditSlider()} href='#gallerie'>Edit Slider</Button>
                     <Button onClick={() => onEditMenu()} href='#menu'>Edit Menu</Button>
                     <Button onClick={() => onViewOrders()} href='#booking'>View Orders</Button>
+                    <Button onClick={() => onViewMessage()}>View Message</Button>
                 </>
             }
 

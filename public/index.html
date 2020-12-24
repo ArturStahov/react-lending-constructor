@@ -37,15 +37,15 @@
       <p class="header-sub-title">RESTAURANT</p>
       <h1 class="header-title">Hungry People</h1>
       <div class="header-button-block">
-        <button class="page-button page-button--button-header">BOOK TABLE</button>
-        <button class="page-button page-button--button-header">EXPLORE</button>
+        <a href="#booking" class="page-button page-button--button-header">BOOK TABLE</a>
+        <a href="#menu" class="page-button page-button--button-header">EXPLORE</a>
       </div>
-      <div class="button-next">
+      <a class="button-next" href="#booking">
         <svg viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M6.33594 8.25L1.02344 2.9375C0.841146 2.75521 0.75 2.53385 0.75 2.27344C0.75 2.01302 0.841146 1.79167 1.02344 1.60938L1.92188 0.75C2.10417 0.567708 2.32552 0.476562 2.58594 0.476562C2.84635 0.476562 3.06771 0.567708 3.25 0.75L7 4.5L10.75 0.75C10.9323 0.567708 11.1536 0.476562 11.4141 0.476562C11.6745 0.476562 11.8958 0.567708 12.0781 0.75L12.9766 1.60938C13.1589 1.79167 13.25 2.01302 13.25 2.27344C13.25 2.53385 13.1589 2.75521 12.9766 2.9375L7.66406 8.25C7.48177 8.43229 7.26042 8.52344 7 8.52344C6.73958 8.52344 6.51823 8.43229 6.33594 8.25Z" />
         </svg>
-      </div>
+      </a>
       <div class="social-nav">
         <a href="#" class="social-nav__link">
           <svg viewBox="0 0 12 21" xmlns="http://www.w3.org/2000/svg">
@@ -156,9 +156,7 @@
       <div class="container">
         <!-- ==============================MENU_REACT_ROOT base root =========== -->
         <div id="root"></div>
-
       </div>
-
     </section>
     <!-- ===============EVENTS==================== -->
     <section class="events" id="events">
@@ -201,32 +199,24 @@
         <h2 class="contact__title">Contact</h2>
         <p class="contact__sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at velit maximus,
           molestie est a, tempor magna.</p>
-        <form class="contact-form">
-          <div class="contact-form__input-block">
-            <input type="text" name="name" placeholder="Name" class="contact-form__input" min="2" max="50" required>
-            <input type="text" name="phone" placeholder="Phone" class="contact-form__input" min="2" max="50" required>
-            <input type="email" name="email" placeholder="Email" class="contact-form__input" min="2" max="50" required>
-          </div>
-          <textarea class="contact-form__textarea" name="message" id=""></textarea>
-          <ul class="contact-info-list">
-            <li class="contact-info-list__item contact-info-list__item--ico-map">5th London Boulevard, U.K.</li>
-            <li class="contact-info-list__item contact-info-list__item--ico-phone">+40 729 131 637/+40 726 458 782</li>
-            <li class="contact-info-list__item contact-info-list__item--ico-mail">office@mindblister.com</li>
-          </ul>
-          <button class="contact-form__button" type="submit">SEND MESSAGE</button>
-        </form>
 
+        <!-- ======================portal form message================= -->
+        <div id="root-message"></div>
+
+        <ul class="contact-info-list">
+          <li class="contact-info-list__item contact-info-list__item--ico-map">5th London Boulevard, U.K.</li>
+          <li class="contact-info-list__item contact-info-list__item--ico-phone">+40 729 131 637/+40 726 458 782</li>
+          <li class="contact-info-list__item contact-info-list__item--ico-mail">office@mindblister.com</li>
+        </ul>
       </div>
 
     </section>
     <!-- ===============GOOGL_MAP==================== -->
     <section class="google-map">
-
       <iframe class="google-map__map"
         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1295726.012463388!2d28.46259245!3d50.632413449999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1607514775740!5m2!1sru!2sua"
         frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </section>
-
 
   </main>
   <!-- ===============FOOTER==================== -->

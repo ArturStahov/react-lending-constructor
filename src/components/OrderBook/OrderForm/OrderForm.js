@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import uniqid from 'uniqid'
+import { info } from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
+import "@pnotify/core/dist/BrightTheme.css";
 import { Button, Input, FormGroup, Form, Title } from './StyledComponent'
-
-
 
 
 export default function OrderForms({ onSubmit }) {
@@ -12,7 +13,6 @@ export default function OrderForms({ onSubmit }) {
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('2');
     const [time, setTime] = useState('');
-
 
     const handlerInput = (e) => {
         const { name, value } = e.target;
@@ -52,11 +52,14 @@ export default function OrderForms({ onSubmit }) {
             id: uniqid()
         }
         onSubmit(orderObj)
-
+        info({
+            title: "Success!",
+            text: "Wait for a call",
+            delay: 3000
+        });
         setName('');
         setPhone('');
         setDate('');
-        setEmail('');
         setEmail('');
         setTime('');
         setNumber('2')

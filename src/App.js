@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 
 import Container from './components/Container/Container'
 import TabControl from './components/Menu/TabControls/TabControls'
@@ -17,16 +17,16 @@ import AuthButton from './components/AuthButton/AuthButton'
 import authContext from './Utils//Context';
 import OrderForm from './components/OrderBook/OrderForm/OrderForm'
 import OrderBook from './components/OrderBook/OrderBook'
+import MessageForm from './components/MessageBook/MessageForm/MessageForm'
+import MessageBook from './components/MessageBook/MessageBook'
+
+import FetchApiMenu from './service/FetchApiMenu'
+import FetchApiMenuGet from './service/FetchApiMenuGet'
+import FetchApiSlider from './service/FetchApiSlider'
+import FetchApiSlidersGet from './service/FetchApiSliderGet'
 
 export default function App() {
 
-  //  objectMenu = {    выд обекта в dataMenu там всегда 1 обект эго можна дополнить и отправить на сервер
-  //   options: {
-  //     menuName,
-  //     firstActiveTab
-  //   },
-  //   itemArr,
-  // }
   const [dataMenu, setDataMenu] = useState([])
   const [dataSlider, setDataSlider] = useState([])
   const [filterMenuTab, setFilterMenuTab] = useState("")
@@ -34,38 +34,79 @@ export default function App() {
   const [toggleSliderEditor, setToggleSliderEditor] = useState(false)
   const [toggleAuthModal, setToggleAuthModal] = useState(false)
   const [toggleBoardOrders, setToggleBoardOrders] = useState(false)
+  const [toggleBoardMessage, setToggleBoardMessage] = useState(false)
   const [menuName, setMenuName] = useState('')
-  const { userID, isLoggedIn, onLogOut } = useContext(authContext);
+  const { isLoggedIn, onLogOut } = useContext(authContext);
   const [ordersArr, setOrdersArr] = useState([])
-
-  // //забырать с бекенда тут
-  // componentDidMount() {
-  //   // if (localStorage.getItem('save_data')) {
-  //   //   this.setState({
-  //   //     data: JSON.parse(localStorage.getItem('save_data'))
-  //   //   })
-  //   // }
-  // }
-
+  const [messageArr, setMessageArr] = useState([])
 
 
   const toggleTabMenu = () => setToggleTabEditor(prevToggle => !prevToggle);
   const toggleSliderMenu = () => setToggleSliderEditor(prevToggle => !prevToggle);
   const toggleAuthModals = () => setToggleAuthModal(prevToggle => !prevToggle);
   const toggleOrdersModals = () => setToggleBoardOrders(prevToggle => !prevToggle);
+  const toggleMessageModals = () => setToggleBoardMessage(prevToggle => !prevToggle);
 
-  // componentDidUpdate(prevState, prevProps) {
-  //   // сдесь отправить данные на сервер
-  //   //по проверке если обновили масив dataMenu
-  //   // обеденить в этом методе все обекты от плагинов
-  //   //в один обект для отправки на бек
-  //   // 
-  // }
+  useEffect(() => {
+    FetchApiSlidersGet()
+      .then(response => {
+        if (response.ok) {
+          console.log('Success, slider load!')
+        }
+        return response.json()
+      })
+      .then(data => {
+        setDataSlider([...data.itemArr])
+
+      })
+  }, [])
 
 
+  const saveSlider = (objectSlider) => {
+    FetchApiSlider(objectSlider)
+      .then(response => {
+        if (response.ok) {
+          console.log('Success, options save!');
+        }
+      })
+  }
   const handlerDishSlider = (objectSlider) => {
     setDataSlider([...objectSlider.itemArr])
     toggleSliderMenu()
+    saveSlider(objectSlider)
+  }
+
+  //  objectMenu = {    
+  //   options: {
+  //     menuName,
+  //     firstActiveTab
+  //   },
+  //   itemArr,
+  // }
+  useEffect(() => {
+    FetchApiMenuGet()
+      .then(response => {
+        if (response.ok) {
+          console.log('Success, menu load!')
+        }
+        return response.json()
+      })
+      .then(data => {
+        setDataMenu([...data.itemArr])
+        setMenuName(data.options.menuName)
+        setFilterMenuTab(data.options.firstActiveTab)
+      })
+  }, [])
+
+
+
+  const saveMenu = (objectMenu) => {
+    FetchApiMenu(objectMenu)
+      .then(response => {
+        if (response.ok) {
+          console.log('Success, options save!');
+        }
+      })
   }
 
   const handlerCreateTable = (objectMenu) => {
@@ -73,6 +114,7 @@ export default function App() {
     setMenuName(objectMenu.options.menuName)
     setFilterMenuTab(objectMenu.options.firstActiveTab)
     toggleTabMenu()
+    saveMenu(objectMenu)
   }
 
   const handlerTabButton = (filterMenuTab) => {
@@ -88,9 +130,16 @@ export default function App() {
   const handlerOrderForm = (objOrder) => {
     setOrdersArr(prevArr => [...prevArr, objOrder])
   }
-  const handlerDeleteOrder = (id) => {
 
+  const handlerDeleteOrder = (id) => {
     setOrdersArr(prev => prev.filter(e => e.id !== id))
+  }
+
+  const handlerMessageForm = (objMessage) => {
+    setMessageArr(prevArr => [...prevArr, objMessage])
+  }
+  const handlerDeleteMessage = (id) => {
+    setMessageArr(prev => prev.filter(e => e.id !== id))
   }
 
 
@@ -107,6 +156,7 @@ export default function App() {
             onEditSlider={toggleSliderMenu}
             onEditMenu={toggleTabMenu}
             onViewOrders={toggleOrdersModals}
+            onViewMessage={toggleMessageModals}
           >
             {!isLoggedIn && < AuthForms />}
           </AuthModal>}
@@ -118,11 +168,18 @@ export default function App() {
           <OrderForm onSubmit={handlerOrderForm} />
         </>
       </RenderPortal>
+
+      {/* ======Message-book================= */}
+      <RenderPortal domID='#root-message'>
+        <>
+          <MessageForm onSubmit={handlerMessageForm} />
+        </>
+      </RenderPortal>
       {/* ======Slider================= */}
       <RenderPortal domID='#slider-root'>
         <>
           {isLoggedIn && <ButtonEditSlider title='Edit Slider' toggle={toggleSliderMenu} />}
-          {!toggleSliderEditor && <Slider itemArr={dataSlider} />}
+          {dataSlider.length > 0 && <Slider itemArr={dataSlider} />}
         </>
       </RenderPortal>
       {/* ======dish Menu================= */}
@@ -165,6 +222,15 @@ export default function App() {
           <Modal onCloseModal={toggleOrdersModals}>
             <Container>
               <OrderBook orderArr={ordersArr} onDeleteItem={handlerDeleteOrder} />
+            </Container>
+          </Modal>
+        )
+      }
+      {
+        toggleBoardMessage && (
+          <Modal onCloseModal={toggleMessageModals}>
+            <Container>
+              <MessageBook messageArr={messageArr} onDeleteItem={handlerDeleteMessage} />
             </Container>
           </Modal>
         )

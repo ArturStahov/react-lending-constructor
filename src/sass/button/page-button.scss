@@ -4,12 +4,15 @@ $button-text-color: #ffffff;
 
 .page-button {
   @include font-settings(1.2rem, 1.2, 700, $button-text-color);
-  text-transform: uppercase;
   width: 200px;
   height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid $border-color;
   border-radius: 0.5rem;
   background-color: transparent;
+  text-transform: uppercase;
   transition-property: background-color;
   transition-duration: 0.3s;
   cursor: pointer;
@@ -17,6 +20,7 @@ $button-text-color: #ffffff;
   :focus {
     background-color: $hover-color;
     border: none;
+    color: #000000;
   }
 }
 
@@ -40,7 +44,7 @@ $button-text-color: #ffffff;
   }
 
   &:before {
-    content: '';
+    content: "";
     display: block;
     width: 61px;
     height: 61px;

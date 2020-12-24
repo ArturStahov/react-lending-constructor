@@ -7,7 +7,7 @@
     text-align: center;
     margin-bottom: 5px;
     &:after {
-      content: '';
+      content: "";
       display: block;
       width: 60px;
       border-bottom: 5px solid #e8c300;
@@ -20,5 +20,53 @@
     max-width: 565px;
     text-align: center;
     margin: 0 auto 50px;
+  }
+}
+
+.contact-info-list {
+  width: max-content;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 auto;
+  align-items: center;
+  &__item {
+    padding-left: 18px;
+    position: relative;
+    @include font-settings(1.3rem, 1.2, 600, rgba(0, 0, 0, 0.5));
+    &::before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      position: absolute;
+      left: -8px;
+      bottom: 3px;
+    }
+    &--ico-map {
+      &::before {
+        background-image: url(../../../images/ico/location.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    &--ico-phone {
+      &::before {
+        background-image: url(../../../images/ico/phone.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    &--ico-mail {
+      &::before {
+        background-image: url(../../../images/ico/envelop.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
   }
 }

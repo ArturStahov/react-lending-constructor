@@ -5,20 +5,18 @@ import { Button, Label, Item, List, Col, Title, Container } from './StyledCompon
 
 
 
-export default function OrderBook({ orderArr, onDeleteItem }) {
+export default function OrderBook({ messageArr, onDeleteItem }) {
 
 
     return (
         <Container>
-            <Title>Orders</Title>
+            <Title>Messages</Title>
             <List>
-                {orderArr.map(({
+                {messageArr.map(({
                     name,
                     phone,
-                    date,
                     email,
-                    number,
-                    time,
+                    message,
                     id }) => (
                         <Item key={id}>
                             <Col>
@@ -27,9 +25,7 @@ export default function OrderBook({ orderArr, onDeleteItem }) {
                                 <p><Label>Email:</Label> {email}</p>
                             </Col>
                             <Col>
-                                <p><Label>Date:</Label> {date}</p>
-                                <p><Label>Time:</Label> {time}</p>
-                                <p><Label>Quality:</Label> {number}</p>
+                                <p><Label>Message:</Label> {message}</p>
                             </Col>
                             <Button onClick={() => onDeleteItem(id)}><FontAwesomeIcon size={'2x'} icon={faTrashAlt} /></Button>
                         </Item>

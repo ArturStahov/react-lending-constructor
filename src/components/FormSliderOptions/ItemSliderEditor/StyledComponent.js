@@ -15,6 +15,7 @@ background-color:#E7FDBB;
 border:2px solid #7FA335;
 border-radius:1rem;
 transition: background-color 0.3s ease-in-out;
+color:#000000;
 &:not(:last-child){
     margin-bottom:10px;
 }
